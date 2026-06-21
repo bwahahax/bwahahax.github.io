@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Memory Player</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top, #1f1f1f, #0a0a0a);
+    font-family: Arial, sans-serif;
+    color: white;
+  }
+
+  .player {
+    width: 320px;
+    background: #121212;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  }
+
+  .album {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 15px;
+    transition: 0.4s ease;
+  }
+
+  .title {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+
+  .memoryText {
+    font-size: 16px;
+    margin: 6px 0 12px;
+  }
+
+  .bar {
+    height: 4px;
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0;
+  }
+
+  .progress {
+    height: 100%;
+    width: 0%;
+    background: #1db954;
+    transition: width 0.2s linear;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 999px;
+    background: #1db954;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .hiddenMessage {
+    display: none;
+    margin-top: 12px;
+    font-size: 13px;
+    color: #ffd166;
+    text-align: center;
+  }
+
+  .easter {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    font-size: 10px;
+    opacity: 0.2;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="player">
+  <div class="album" id="album"></div>
+
+  <div class="title">Memory Shuffle</div>
+  <div class="memoryText" id="memoryText">Tap shuffle...</div>
+
+  <div class="bar"><div class="progress" id="progress"></div></div>
+
+  <button onclick="shuffleMemory()">Shuffle Memories</button>
+
+  <div class="hiddenMessage" id="birthdayMsg">
+    🎂 Happy Birthday. This one is just for you.
+  </div>
+
+  <audio id="audio" loop></audio>
+</div>
+
+<div class="easter">try clicking the album...</div>
+
+<script>
+const memories = [
+  {
+    img: "https://images.unsplash.com/photo-1520975922284-6b8b0b5d3a7b",
+    text: "That moment we couldn’t stop laughing",
+    song: "music1.mp3"
+  },
+  {
+    img: "https://images.unsplash.com/photo-1520975682031-a7f0c3d6f2c7",
+    text: "A random day that turned unforgettable",
+    song: "music2.mp3"
+  },
+  {
+    img: "https://images.unsplash.com/photo-1520975958225-5b7c0c9d8c1a",
+    text: "One of my favorite memories with you",
+    song: "music3.mp3"
+  }
+];
+
+let progress = 0;
+let interval;
+
+function shuffleMemory() {
+  const m = memories[Math.floor(Math.random() * memories.length)];
+
+  document.getElementById("album").style.backgroundImage = `url('${m.img}')`;
+  document.getElementById("memoryText").innerText = m.text;
+
+  const audio = document.getElementById("audio");
+  audio.src = m.song; // put your real hosted audio files here
+  audio.play().catch(()=>{});
+
+  progress = 0;
+  clearInterval(interval);
+
+  interval = setInterval(() => {
+    progress += 1;
+    document.getElementById("progress").style.width = progress + "%";
+    if (progress >= 100) clearInterval(interval);
+  }, 200);
+}
+
+// Easter egg: click album 5 times
+let clicks = 0;
+document.getElementById("album").onclick = () => {
+  clicks++;
+  if (clicks === 5) {
+    document.getElementById("birthdayMsg").style.display = "block";
+  }
+};
+
+// Keyboard easter egg (B I R T H D A Y)
+let typed = "";
+document.addEventListener("keydown", (e) => {
+  typed += e.key.toLowerCase();
+  if (typed.includes("birthday")) {
+    document.getElementById("birthdayMsg").style.display = "block";
+  }
+});
+
+// 🎂 Birthday-only message unlock
+const today = new Date();
+const month = today.getMonth() + 1;
+const day = today.getDate();
+
+// change this to their birthday:
+const birthMonth = 7;
+const birthDay = 12;
+
+if (month === birthMonth && day === birthDay) {
+  document.getElementById("birthdayMsg").style.display = "block";
+}
+</script>
+
+</body>
+</html>
