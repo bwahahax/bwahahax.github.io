@@ -114,17 +114,17 @@
 <script>
 const memories = [
   {
-    img: "https://images.unsplash.com/photo-1520975922284-6b8b0b5d3a7b",
+    img: "https://www.amazon.com/photos/shared/iYwUaVWyTquDSphMNlNF9A.xpiLBy5lFXO6zXfrhCivO0",
     text: "That moment we couldn’t stop laughing",
     song: "music1.mp3"
   },
   {
-    img: "https://images.unsplash.com/photo-1520975682031-a7f0c3d6f2c7",
+    img: "https://www.amazon.com/photos/shared/nPKlNvQvRRWHLgWngLAujA.qUWiWTK0F3_ja09jJml_vW",
     text: "A random day that turned unforgettable",
     song: "music2.mp3"
   },
   {
-    img: "https://images.unsplash.com/photo-1520975958225-5b7c0c9d8c1a",
+    img: "https://www.amazon.com/photos/shared/ohbwW7LBQo-kms4twX5muQ.dCDWxeSgm9jRzV8955bf9_",
     text: "One of my favorite memories with you",
     song: "music3.mp3"
   }
