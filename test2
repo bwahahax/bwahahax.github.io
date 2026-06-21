@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Player</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1DB954, #121212);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    text-align: center;
+}
+
+.player {
+    background: rgba(255,255,255,0.08);
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+}
+
+.album {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 20px;
+    border-radius: 15px;
+    background-image: url('https://picsum.photos/400');
+    background-size: cover;
+    background-position: center;
+}
+
+h1 {
+    margin: 10px 0;
+}
+
+.memory {
+    font-size: 1.2rem;
+    margin: 20px 0;
+    line-height: 1.5;
+}
+
+button {
+    background: #1DB954;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+</style>
+</head>
+
+<body>
+
+<div class="player">
+    <div class="album"></div>
+
+    <h1>Memory Player</h1>
+    <p>Now Playing:</p>
+
+    <div id="memory" class="memory"></div>
+
+    <button onclick="newMemory()">▶ Next Memory</button>
+</div>
+
+<script>
+
+const memories = [
+"Remember when we stayed up way too late talking and somehow solved absolutely none of the world's problems?",
+"That time we laughed so hard we couldn't breathe.",
+"Remember our terrible idea that somehow worked perfectly?",
+"The day we got completely lost and called it an adventure.",
+"Remember that inside joke that nobody else understands?",
+"That moment I knew we'd be friends for a long time.",
+"Remember when everything went wrong and we still had fun?",
+"Your birthday reminder: you're stuck with me."
+];
+
+function newMemory() {
+    const random = memories[Math.floor(Math.random() * memories.length)];
+    document.getElementById("memory").innerText = random;
+}
+
+newMemory();
+
+</script>
+
+</body>
+</html>
